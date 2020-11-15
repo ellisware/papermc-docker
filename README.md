@@ -1,5 +1,5 @@
 # PaperMC Docker
-This is a Linux Docker image for the PaperMC Minecraft server.
+This is a Linux Docker image for the PaperMC Minecraft server.  Forked from phyremaster/papermc.
 
 PaperMC is an optimized Minecraft server with plugin support (Bukkit, Spigot, Sponge, etc.).
 This image provides a basic PaperMC server. All customizations are left to the user.
@@ -8,7 +8,7 @@ It is assumed that the user has already acquired a working Docker installation. 
 ## Command
 With this image, you can create a new PaperMC Minecraft server with one command (note that running said command indicates agreement to the Minecraft EULA). Here is an example:
 
-```sudo docker run -p 25565:25565 phyremaster/papermc```
+```sudo docker run -p 25565:25565 mtcanuck1/papermc```
 
 While this command will work just fine in many cases, it is only the bare minimum required to start a functional server and can be vastly improved by specifying some...
 ## Options
@@ -49,7 +49,7 @@ Environment variables are options that are specified in the format `-e <NAME>="<
   - Note: there must be a PaperMC release for the specified version of Minecraft.
   - If this is not set, the latest version supported by PaperMC will be used.
   - Changing this on an existing server will change the version *without wiping the server*.
-  - `-e MC_VERSION="<1.14.4>"`
+  - `-e MC_VERSION="<1.16.4>"`
 - PaperMC Build
   - **Name:** `PAPER_BUILD`
   - Set this to the PaperMC build number that the server should use.
@@ -60,14 +60,27 @@ Environment variables are options that are specified in the format `-e <NAME>="<
   - **Name:** `MC_RAM`
   - Set this to the amount of RAM the server can use.
   - Must be formatted as a number followed by `M` for "Megabytes" or `G` for "Gigabytes".
-  - If this is not set, it will use 1 Gigabyte of RAM default.
+  - If this is not set, it will use 6 Gigabyte of RAM default.
   - `-e MC_RAM="<4G>"`
 - Java options
   - **Name:** `JAVA_OPTS`
   - **ADVANCED USERS ONLY**
   - Set to any additional Java command line options that you would like to include.
-  - By default, this environment variable is set to the empty string.
+  - Setting any flags here will clear the optimizations from this blog: 
+        https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft/
   - `-e JAVA_OPTS="-XX:+UseConcMarkSweepGC -XX:+UseParNewGC"`
+- RCON
+  - **Name:** `RCON`,`RCON_PASSWORD`
+  - Enable rcon, and set the password
+  - By default, rcon is enabled and the default password is "changetoastrongpassword"
+  - Change the password - you have been warned.
+  - `-e RCON="false"`
+- SEED
+  - **Name:** `SEED`
+  - Set a seed to build the world on
+  - `-e SEED="9058136630944956755"`
+  
+  
 ## Further Setup
 From this point, the server should be configured in the same way as any other Minecraft server. The server's files, including `server.properties`, can be found in the volume that was specified earlier. The port that was specified earlier will probably need to be forwarded as well. For details on how to do this and other such configuration, Google it, because it works the same as any other Minecraft server.
 # Technical
@@ -76,5 +89,9 @@ This project *does **NOT** redistribute the Minecraft server files*. Instead, th
 **PLEASE NOTE:** This is an unofficial project. I did not create PaperMC. [This is the official PaperMC website.](https://papermc.io/)
 
 ## Project Pages
+Original:
 - [GitHub page](https://github.com/Phyremaster/papermc-docker).
 - [Docker Hub page](https://hub.docker.com/r/phyremaster/papermc).
+This Project:
+- [GitHub page](https://github.com/ellisware/papermc-docker).
+- [Docker Hub page](https://hub.docker.com/r/mtcanuck1/papermc).
