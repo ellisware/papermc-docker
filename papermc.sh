@@ -24,6 +24,9 @@ if [ ! -e ${JAR_NAME}.jar ] || ${outdated}
     then
       java -jar ${JAR_NAME}.jar
       sed -i 's/false/true/g' eula.txt
+      sed -i 's/^\s*level-seed\s*=.*$/level-seed='"$SEED"'/' server.properties
+      sed -i 's/^\s*enable-rcon\s*=.*$/enable-rcon='"$RCON"'/' server.properties
+      sed -i 's/^\s*rcon.password\s*=.*$/rcon.password='"$RCON_PASSWORD"'/' server.properties
     fi
 fi
 
