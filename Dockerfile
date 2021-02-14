@@ -2,7 +2,7 @@
 FROM openjdk:11.0.9.1-slim-buster
 
 # Environment variables
-ENV MC_VERSION="1.16.4" \
+ENV MC_VERSION="1.16.5" \
     PAPER_BUILD="latest" \
     MC_RAM="6G" \
     SEED="9058136630944956755" \
